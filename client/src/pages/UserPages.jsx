@@ -5,6 +5,7 @@ import { api } from "../api/axios";
 import { Notify, ImageModal } from "./Modals";
 import { StarRating } from "./UI";
 import { STATUS_LABELS, PURPOSE_LABELS } from "../utils/labels";
+import { SERVER_URL } from "../api/config";
 
 export function Profile() {
 	const [orders, setOrders] = useState([]);
@@ -304,7 +305,7 @@ export function Profile() {
 								>
 									{item.image_url && (
 										<img
-											src={`http://localhost:4000${item.image_url}`}
+											src={`${SERVER_URL}${item.image_url}`}
 											alt={item.name}
 											className="order-item-img"
 										/>
@@ -774,7 +775,7 @@ export function Reviews() {
 								{r.images.map((img, i) => (
 									<img
 										key={i}
-										src={`http://localhost:4000${img}`}
+										src={`${SERVER_URL}${img}`}
 										alt="review"
 										className="review-thumb"
 										onClick={() => setFullImage(img)}
