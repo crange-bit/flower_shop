@@ -94,7 +94,7 @@ export default function Cart() {
 					<div key={i.cart_id} className="cart-item">
 						{i.image_url && (
 							<img
-								src={`http://localhost:4000${i.image_url}`}
+								src={`${SERVER_URL}${i.image_url}`}
 								alt={i.name}
 								className="cart-item-img"
 							/>
