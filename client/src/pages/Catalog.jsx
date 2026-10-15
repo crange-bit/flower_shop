@@ -205,7 +205,7 @@ export default function Catalog() {
 						<div className="product-image-wrapper">
 							{p.image_url && (
 								<img
-									src={`http://localhost:4000${p.image_url}`}
+									src={`${SERVER_URL}${p.image_url}`}
 									alt={p.name}
 									className="product-image"
 								/>
