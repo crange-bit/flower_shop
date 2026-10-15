@@ -5,6 +5,7 @@ import { addToCart, fetchCart } from "../store/cartSlice";
 import { api } from "../api/axios";
 import { QuantitySelector } from "./UI";
 import { Notify, ProductModal } from "./Modals";
+import { SERVER_URL } from "../api/config";
 
 export default function Catalog() {
 	const { data, loading, page, pages } = useSelector((s) => s.products);
