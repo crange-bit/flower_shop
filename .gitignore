@@ -1,0 +1,26 @@
+# Зависимости
+node_modules/
+
+# Результаты сборки
+dist/
+build/
+
+# Локальные переменные окружения
+.env
+.env.local
+.env.development.local
+
+# Логи и кэш
+*.log
+npm-debug.log*
+.cache/
+
+# Настройки редактора и ОС
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Тестовые и временные файлы
+coverage/
+*.tmp
