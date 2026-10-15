@@ -31,7 +31,7 @@ export function ImageModal({ imageUrl, onClose }) {
 			style={{ zIndex: 9999 }}
 		>
 			<img
-				src={"http://localhost:4000" + imageUrl}
+				src={`${SERVER_URL}${imageUrl}`}
 				alt="Full size"
 				className="image-modal-content"
 				onClick={(e) => e.stopPropagation()}
@@ -123,7 +123,7 @@ export function ProductModal({ productId, onClose }) {
 
 				{product.image_url && (
 					<img
-						src={`http://localhost:4000${product.image_url}`}
+						src={`${SERVER_URL}${product.image_url}`}
 						alt={product.name}
 						className="product-modal-img"
 						onClick={() => setFullImage(product.image_url)}
