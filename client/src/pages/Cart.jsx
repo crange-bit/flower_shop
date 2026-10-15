@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { fetchCart, removeCartItem, updateCartItem } from "../store/cartSlice";
 import { ConfirmDialog, Notify } from "./Modals";
 import { QuantitySelector } from "./UI";
+import { SERVER_URL } from "../api/config";
 
 export default function Cart() {
 	const items = useSelector((s) => s.cart.items);
