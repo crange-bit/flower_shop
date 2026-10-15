@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 
 exports.seed = async function (knex) {
-	// Очистка всех таблиц
+	// Очистка всех таблиц в порядке зависимостей
 	await knex("user_promotions").del();
 	await knex("order_items").del();
 	await knex("orders").del();
@@ -15,65 +15,37 @@ exports.seed = async function (knex) {
 	await knex("roles").del();
 	await knex("order_statuses").del();
 
-	// Добавление статусов заказов
+	// Статусы заказов
 	await knex("order_statuses").insert([
 		{ id: 1, name: "new", description: "Новый заказ" },
 		{ id: 2, name: "processing", description: "В обработке" },
 		{ id: 3, name: "assembled", description: "Собран" },
 		{ id: 4, name: "delivered", description: "Доставлен" },
-		{ id: 5, name: "cancelled", description: "Отменен" },
+		{ id: 5, name: "cancelled", description: "Отменён" },
 	]);
 
-	// Добавление ролей
+	// Роли
 	await knex("roles").insert([
 		{ id: 1, name: "user" },
 		{ id: 2, name: "manager" },
 		{ id: 3, name: "admin" },
 	]);
 
-	// Добавление категорий
+	// Категории
 	await knex("categories").insert([
-		{
-			id: 1,
-			name: "Розы",
-			description: "Классические розы различных цветов и сортов",
-		},
-		{
-			id: 2,
-			name: "Тюльпаны",
-			description: "Весенние тюльпаны всех оттенков",
-		},
+		{ id: 1, name: "Розы", description: "Классические розы различных цветов и сортов" },
+		{ id: 2, name: "Тюльпаны", description: "Весенние тюльпаны всех оттенков" },
 		{ id: 3, name: "Пионы", description: "Пышные и ароматные пионы" },
-		{
-			id: 4,
-			name: "Хризантемы",
-			description: "Осенние хризантемы для долгого стояния",
-		},
+		{ id: 4, name: "Хризантемы", description: "Осенние хризантемы для долгого стояния" },
 		{ id: 5, name: "Лилии", description: "Изящные лилии с ярким ароматом" },
-		{
-			id: 6,
-			name: "Орхидеи",
-			description: "Экзотические орхидеи в горшках",
-		},
+		{ id: 6, name: "Орхидеи", description: "Экзотические орхидеи в горшках" },
 		{ id: 7, name: "Гортензии", description: "Пышные шапки гортензий" },
-		{
-			id: 8,
-			name: "Герберы",
-			description: "Яркие и жизнерадостные герберы",
-		},
-		{
-			id: 9,
-			name: "Ирисы",
-			description: "Элегантные ирисы для стильных букетов",
-		},
-		{
-			id: 10,
-			name: "Подсолнухи",
-			description: "Солнечные подсолнухи для ярких композиций",
-		},
+		{ id: 8, name: "Герберы", description: "Яркие и жизнерадостные герберы" },
+		{ id: 9, name: "Ирисы", description: "Элегантные ирисы для стильных букетов" },
+		{ id: 10, name: "Подсолнухи", description: "Солнечные подсолнухи для ярких композиций" },
 	]);
 
-	// Добавление товаров
+	// Товары (из вашего дампа, с сохранением ID и полей)
 	await knex("products").insert([
 		{
 			id: 1,
@@ -82,9 +54,10 @@ exports.seed = async function (knex) {
 			description:
 				"Классические красные розы на длинных стеблях. Бутон плотный, лепестки бархатистые. Идеально подходят для романтических подарков.",
 			price: 3500.0,
-			stock: 50,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			stock: 0,
+			image_url: "/uploads/1790873917608-Красные розы 50см.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 		{
 			id: 2,
@@ -93,9 +66,10 @@ exports.seed = async function (knex) {
 			description:
 				"Нежные белые розы с легким кремовым оттенком. Символ чистоты и невинности.",
 			price: 4200.0,
-			stock: 35,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			stock: 0,
+			image_url: "/uploads/1790873926570-Белые розы 60см.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 		{
 			id: 3,
@@ -104,9 +78,10 @@ exports.seed = async function (knex) {
 			description:
 				"Нежно-розовые розы среднего размера. Прекрасный подарок для девушек и женщин.",
 			price: 2900.0,
-			stock: 45,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			stock: 40,
+			image_url: "/uploads/1790873941002-Розовые розы 40см.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 		{
 			id: 4,
@@ -115,9 +90,10 @@ exports.seed = async function (knex) {
 			description:
 				"Яркие красные тюльпаны. Символ весны и любви. В упаковке 25 штук.",
 			price: 1800.0,
-			stock: 100,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			stock: 99,
+			image_url: "/uploads/1790873959646-Тюльпаны красные.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 		{
 			id: 5,
@@ -127,8 +103,9 @@ exports.seed = async function (knex) {
 				"Солнечные желтые тюльпаны. Поднимают настроение и дарят тепло. 25 штук в букете.",
 			price: 1800.0,
 			stock: 80,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			image_url: "/uploads/1790873970348-Тюльпаны желтые.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 		{
 			id: 6,
@@ -138,8 +115,9 @@ exports.seed = async function (knex) {
 				"Пышные розовые пионы с большими бутонами. Ароматные и невероятно красивые.",
 			price: 5000.0,
 			stock: 20,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			image_url: "/uploads/1790873980113-Пионы розовые.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 		{
 			id: 7,
@@ -148,9 +126,10 @@ exports.seed = async function (knex) {
 			description:
 				"Белоснежные пионы с кремовым центром. Элегантные и изысканные.",
 			price: 5500.0,
-			stock: 15,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			stock: 14,
+			image_url: "/uploads/1790873989173-Пионы белые.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 		{
 			id: 8,
@@ -160,8 +139,9 @@ exports.seed = async function (knex) {
 				"Кустовые хризантемы разных цветов. Стоят в вазе до 3 недель.",
 			price: 1500.0,
 			stock: 60,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			image_url: "/uploads/1790874004160-Хризантемы кустовые.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 		{
 			id: 9,
@@ -171,8 +151,9 @@ exports.seed = async function (knex) {
 				"Белые лилии с сильным ароматом. Крупные цветы на высоких стеблях.",
 			price: 3800.0,
 			stock: 30,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			image_url: "/uploads/1790874019488-Лилии белые.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 		{
 			id: 10,
@@ -182,24 +163,29 @@ exports.seed = async function (knex) {
 				"Орхидея в горшке. Цветет до 3 месяцев. Проста в уходе.",
 			price: 2500.0,
 			stock: 25,
-			image_url: "/uploads/1779146350824-1674146378_63401090.jpg",
+			image_url: "/uploads/1790874030591-Орхидея фаленопсис.jpg",
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.365757+03",
 		},
 	]);
 
-	// Хеширование пароля
+	// Хеш пароля "123456"
 	const hash = await bcrypt.hash("123456", 10);
 
-	// Добавление пользователей
+	// Пользователи (хеши сохранены из дампа — все три от одного пароля)
 	await knex("users").insert([
 		{
 			id: 1,
 			email: "pasha.hern@gmail.com",
-			password_hash: hash,
+			password_hash:
+				"$2b$10$EUF/62IaNKh.v6K3Zd9nR.x8XHhWWJIx24Mfw5JAR8caG/J6Ll13G",
 			full_name: "Администратор",
 			phone: "+79990000000",
 			is_verified: true,
 			verification_token: null,
+			reset_password_token: null,
+			reset_password_expires: null,
+			created_at: "2026-09-17 18:45:16.446309+03",
 		},
 		{
 			id: 2,
@@ -209,6 +195,9 @@ exports.seed = async function (knex) {
 			phone: "+79991111111",
 			is_verified: true,
 			verification_token: null,
+			reset_password_token: null,
+			reset_password_expires: null,
+			created_at: "2026-09-17 18:45:16.446309+03",
 		},
 		{
 			id: 3,
@@ -218,63 +207,27 @@ exports.seed = async function (knex) {
 			phone: "+79992222222",
 			is_verified: true,
 			verification_token: null,
+			reset_password_token: null,
+			reset_password_expires: null,
+			created_at: "2026-09-17 18:45:16.446309+03",
 		},
 	]);
 
-	// Добавление связей пользователей с ролями
+	// Роли пользователей
 	await knex("user_roles").insert([
-		{ user_id: 1, role_id: 3 }, // Админ
-		{ user_id: 2, role_id: 2 }, // Менеджер
-		{ user_id: 3, role_id: 1 }, // Пользователь
+		{ id: 1, user_id: 1, role_id: 3 }, // Админ
+		{ id: 2, user_id: 2, role_id: 2 }, // Менеджер
+		{ id: 3, user_id: 3, role_id: 1 }, // Пользователь
 	]);
 
-	// Добавление отзывов
-	await knex("reviews").insert([
-		{
-			user_id: 3,
-			product_id: 1,
-			rating: 5,
-			delivery_rating: 5,
-			quality_rating: 5,
-			price_rating: 4,
-			comment:
-				"Отличные розы! Очень свежие, доставили вовремя. Буду заказывать еще.",
-			images: null,
-			is_approved: true,
-		},
-		{
-			user_id: 3,
-			product_id: 4,
-			rating: 4,
-			delivery_rating: 5,
-			quality_rating: 4,
-			price_rating: 4,
-			comment:
-				"Хорошие тюльпаны, но некоторые уже начали раскрываться. В целом довольна.",
-			images: null,
-			is_approved: true,
-		},
-		{
-			user_id: 3,
-			product_id: 6,
-			rating: 5,
-			delivery_rating: 5,
-			quality_rating: 5,
-			price_rating: 5,
-			comment:
-				"Восхитительные пионы! Стояли почти две недели. Огромное спасибо!",
-			images: null,
-			is_approved: true,
-		},
-	]);
-
-	// Добавление акций
+	// Акции (из дампа: WELCOME10 и FREESHIP)
 	const today = new Date();
 	const futureDate = new Date();
 	futureDate.setDate(today.getDate() + 365);
 
 	await knex("promotions").insert([
 		{
+			id: 1,
 			name: "Скидка на первую покупку",
 			description: "Скидка 10% для новых клиентов",
 			code: "WELCOME10",
@@ -282,12 +235,14 @@ exports.seed = async function (knex) {
 			value: 10.0,
 			min_order_amount: 1000,
 			max_uses: 100,
-			used_count: 0,
+			used_count: 1,
 			start_date: today,
 			end_date: futureDate,
 			is_active: true,
+			created_at: "2026-09-17 18:45:16.453204+03",
 		},
 		{
+			id: 2,
 			name: "Бесплатная доставка",
 			description: "Бесплатная доставка при заказе от 5000 рублей",
 			code: "FREESHIP",
@@ -299,19 +254,30 @@ exports.seed = async function (knex) {
 			start_date: today,
 			end_date: new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000),
 			is_active: true,
-		},
-		{
-			name: "Розы в подарок",
-			description: "3 красные розы в подарок при заказе от 3000 рублей",
-			code: "ROSESGIFT",
-			type: "percentage",
-			value: 15.0,
-			min_order_amount: 3000,
-			max_uses: null,
-			used_count: 0,
-			start_date: today,
-			end_date: new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000),
-			is_active: true,
+			created_at: "2026-09-17 18:45:16.453204+03",
 		},
 	]);
+
+	// Обнуляем последовательности — чтобы новые записи получали правильные id
+	await knex.raw(
+		"SELECT setval('public.categories_id_seq', (SELECT MAX(id) FROM public.categories))"
+	);
+	await knex.raw(
+		"SELECT setval('public.products_id_seq', (SELECT MAX(id) FROM public.products))"
+	);
+	await knex.raw(
+		"SELECT setval('public.users_id_seq', (SELECT MAX(id) FROM public.users))"
+	);
+	await knex.raw(
+		"SELECT setval('public.user_roles_id_seq', (SELECT MAX(id) FROM public.user_roles))"
+	);
+	await knex.raw(
+		"SELECT setval('public.promotions_id_seq', (SELECT MAX(id) FROM public.promotions))"
+	);
+	await knex.raw(
+		"SELECT setval('public.order_statuses_id_seq', (SELECT MAX(id) FROM public.order_statuses))"
+	);
+	await knex.raw(
+		"SELECT setval('public.roles_id_seq', (SELECT MAX(id) FROM public.roles))"
+	);
 };
